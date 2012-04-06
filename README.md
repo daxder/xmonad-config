@@ -1,8 +1,8 @@
 xmonad configuration
 ====================
-This is the xmonad configuration that I use at work. It uses dzen2 and conky for the status bars.
 
-[xmonad](http://xmonad.org/) is a tiling window manager written in Haskell.
+This is another xmonad configuration file on GitHub. The file was forked from xmonad-config project of brafales at github. I have made some changes to the config, so that it better supports my profile of daily use.
 
-For a more detailed explanation of the steps I took to get to this
-final configuration feel free to visit the [explaining post at ThinkInGeek](http://thinkingeek.com/2011/11/21/simple-guide-configure-xmonad-dzen2-conky/)
+Feel free to also change, fork or do whatever you like with this piece of incitement.
+
+Have a look at the original repo or the corresponding web page [explaining post at ThinkInGeek](http://thinkingeek.com/2011/11/21/simple-guide-configure-xmonad-dzen2-conky/); if you are new to xmonad, I suggest visting the projects page on the web ([xmonad](http://xmonad.org/)), too.
