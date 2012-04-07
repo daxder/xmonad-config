@@ -133,10 +133,13 @@ manageHook' = (composeAll . concat $
    , [className      =? c     --> doShift "4:chat"    | c      <- xChat]     -- Chat programs
    , [className      =? c     --> doShift "5:vim"     | c      <- xVim]      -- Dev. programs
    , [className      =? c     --> doCenterFloat       | c      <- xFloats]   -- VMs, Gimp, etc.
+   , [role           =? l     --> doCenterFloat       | l      <- xRoles]
    , [isFullscreen            --> doFullFloat']
    ])
 
    where
+
+   role       = stringProperty "WM_WINDOW_ROLE"
 
    -- class names
    xFloats    = ["qemu-system-x86_64","Gimp"]
@@ -146,6 +149,7 @@ manageHook' = (composeAll . concat $
    xChat      = ["Pidgin", "Buddy List", "Skype"]
    xVim       = ["Gvim"]
    xSpecial   = ["bashrun"]
+   xRoles     = ["conversation"]
 
 -- full float "hack"
 doFullFloat' :: ManageHook
