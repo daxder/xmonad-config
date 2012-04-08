@@ -63,11 +63,11 @@ modMask' = mod4Mask
 -- commands
 xTerminal = "gnome-terminal"
 xWorkspaces = ["1:main","2:web","3:email","4:chat","5:vim"]
-xMonadBar  = "dzen2 -x '0' -y '0' -h '24' -w '866' " ++
+xMonadBar  = "dzen2 -x '0' -y '0' -h '24' -w '916' " ++
              "-ta 'l' -fg '#FFFFFF' -bg '#1B1D1E' " ++
              "-fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*'"
 xStatusBar  = "conky -c ~/.xmonad/conky_dzen.conf | " ++
-              "dzen2 -x '866' -y '0' -w '500' -h '24' " ++
+              "dzen2 -x '916' -y '0' -w '450' -h '24' " ++
               "-ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' " ++
               "-fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*'"
 xBitmapsDir = "/home/ecto/.xmonad/dzen_icons"
@@ -163,16 +163,16 @@ myLogHook h = dynamicLogWithPP $ defaultPP
    , ppHidden           =   dzenColor "white" "#1B1D1E"     . pad
    , ppHiddenNoWindows  =   dzenColor "#7b7b7b" "#1B1D1E"   . pad
    , ppUrgent           =   dzenColor "#ff0000" "#1B1D1E"   . pad
-   , ppWsSep            =   " "
-   , ppSep              =   " | " 
+   , ppWsSep            =   ""
+   , ppSep              =   "|" 
    , ppLayout           =   dzenColor "#ebac54" "#1B1D1E" .
                  (\x -> case x of 
-                  "Tall"                  -> "^i(" ++ xBitmapsDir ++ "/tall.xbm)"
-                  "ResizableTall"         -> "^i(" ++ xBitmapsDir ++ "/tall.xbm)"
-                  "Mirror Tall"           -> "^i(" ++ xBitmapsDir ++ "/mtall.xbm)"
-                  "Mirror ResizableTall"  -> "^i(" ++ xBitmapsDir ++ "/mtall.xbm)"
-                  "Full"                  -> "^i(" ++ xBitmapsDir ++ "/full.xbm)"
-                  "Simple Float"          -> "~"
+                  "Tall"                  -> " ^i(" ++ xBitmapsDir ++ "/tall.xbm) "
+                  "ResizableTall"         -> " ^i(" ++ xBitmapsDir ++ "/tall.xbm) "
+                  "Mirror Tall"           -> " ^i(" ++ xBitmapsDir ++ "/mtall.xbm) "
+                  "Mirror ResizableTall"  -> " ^i(" ++ xBitmapsDir ++ "/mtall.xbm) "
+                  "Full"                  -> " ^i(" ++ xBitmapsDir ++ "/full.xbm) "
+                  "Simple Float"          -> " ~ "
                   _ -> x
                  )
       , ppTitle            =   (" " ++) . dzenColor "white" "#1B1D1E" . dzenEscape
