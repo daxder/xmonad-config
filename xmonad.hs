@@ -63,17 +63,17 @@ modMask' = mod4Mask
 -- commands
 xTerminal = "gnome-terminal"
 xWorkspaces = ["1:main","2:web","3:email","4:chat","5:vim"]
-xMonadBar  = "dzen2 -x '0' -y '0' -h '24' -w '916' " ++
+xMonadBar  = "dzen2 -x '0' -y '0' -h '24' -w '850' " ++
              "-ta 'l' -fg '#FFFFFF' -bg '#1B1D1E' " ++
              "-fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*'"
 xStatusBar  = "conky -c ~/.xmonad/conky_dzen.conf | " ++
-              "dzen2 -x '916' -y '0' -w '450' -h '24' " ++
+              "dzen2 -x '850' -y '0' -w '515' -h '24' " ++
               "-ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' " ++
               "-fn '-*-terminus-*-*-*-*-12-*-*-*-*-*-*-*'"
 xBitmapsDir = "/home/ecto/.xmonad/dzen_icons"
 xScreensaver = "gnome-screensaver"
 xBrowser = "firefox"
-xMUA = "/opt/thunderbird/thunderbird"
+xMUA = "thunderbird"
 xEditor = "gvim"
 xRun = "bashrun"
 
@@ -104,6 +104,7 @@ main = do
       , normalBorderColor   = xNormalBorderColor
       , focusedBorderColor  = xFocusedBorderColor
       , borderWidth         = 1
+      , focusFollowsMouse   = False
       }
       `additionalKeys`
             [ ((0,                              xK_Print), spawn "scrot -e 'mv $f ~/screenshots/'")
@@ -120,6 +121,7 @@ main = do
             , ((modMask' .|. shiftMask,         xK_s),     withFocused $ windows . W.sink)
             , ((modMask' .|. shiftMask,         xK_l),     spawn "gnome-screensaver-command -l")
             , ((modMask' .|. shiftMask,         xK_q),     spawn "gnome-session-save --logout")
+            , ((modMask' .|. shiftMask,         xK_n),     spawn "nautilus")
             , ((modMask',                       xK_p),     spawn xRun)
             ]
 
@@ -133,15 +135,18 @@ manageHook' = (composeAll . concat $
    , [className      =? c     --> doShift "4:chat"    | c      <- xChat]     -- Chat programs
    , [className      =? c     --> doShift "5:vim"     | c      <- xVim]      -- Dev. programs
    , [className      =? c     --> doCenterFloat       | c      <- xFloats]   -- VMs, Gimp, etc.
-   , [role           =? l     --> doCenterFloat       | l      <- xRoles]
+   , [role           =? l     --> doCenterFloat       | l      <- xRoles]    -- IM windows
+   , [title          =? t     --> doCenterFloat       | t      <- xTitles]   -- Backup info messages
    , [isFullscreen            --> doFullFloat']
    ])
 
    where
 
    role       = stringProperty "WM_WINDOW_ROLE"
+   title      = stringProperty "WM_NAME"
 
    -- class names
+   xTitles    = ["Backup"]
    xFloats    = ["qemu-system-x86_64","Gimp"]
    xDev       = ["gnome-terminal"]
    xWeb       = ["Firefox", "Google-chrome", "Chromium"]
